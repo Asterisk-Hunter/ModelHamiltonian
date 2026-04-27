@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
@@ -50,7 +50,7 @@
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=1ae7504c"></script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -194,6 +194,7 @@
 
 
 
+<li class="toctree-l1"><a class="reference internal" href="../examples/picket_fence.html">Tutorial: The Picket-Fence Model Hamiltonian</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../examples/molkit.html">Tutorial: Molkit</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">API</span></p>
@@ -418,6 +419,7 @@ document.write(`
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#moha.HamRG.__init__"><code class="docutils literal notranslate"><span class="pre">HamRG.__init__()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#picket-fence-model">Picket-Fence Model</a></li>
 </ul>
 </li>
 </ul>
@@ -647,6 +649,12 @@ This example initializes a <strong>3-site Richardson-Gaudin Hamiltonian</strong>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;One-body Integral Matrix:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">H</span><span class="o">.</span><span class="n">generate_one_body_integral</span><span class="p">(</span><span class="n">dense</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
 </pre></div>
 </div>
+<section id="picket-fence-model">
+<h3>Picket-Fence Model<a class="headerlink" href="#picket-fence-model" title="Link to this heading">#</a></h3>
+<p>The <strong>Picket-Fence Model</strong> is a special case of the Richardson-Gaudin model with equally spaced site energies and constant pairing interaction.</p>
+<p>It can be implemented by setting <span class="math notranslate nohighlight">\(\mu_p = (p - \frac{N-1}{2}) + G\)</span> and <span class="math notranslate nohighlight">\(J_{pp}^{\text{eq}} = G\)</span>.</p>
+<p>For a detailed walkthrough, see the <span class="xref std std-doc">Picket-Fence Tutorial</span>.</p>
+</section>
 </section>
 </section>
 
@@ -727,6 +735,7 @@ This example initializes a <strong>3-site Richardson-Gaudin Hamiltonian</strong>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#moha.HamRG.__init__"><code class="docutils literal notranslate"><span class="pre">HamRG.__init__()</span></code></a></li>
 </ul>
 </li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#picket-fence-model">Picket-Fence Model</a></li>
 </ul>
 </li>
 </ul>

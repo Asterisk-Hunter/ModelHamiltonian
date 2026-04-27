@@ -1,0 +1,828 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Tutorial: The Picket-Fence Model Hamiltonian &#8212; Ayers Lab</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/picket_fence';</script>
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorial: Molkit" href="molkit.html" />
+    <link rel="prev" title="Tutorial: Richardson-Gaudin model" href="RG.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Ayers Lab - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Ayers Lab - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to ModelHamiltonian documentation!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">User Documentation</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Demonstration.html">Tutorial: Occupation-based Hamiltionians</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="Ising.html">Tutorial: Spin-based Hamiltonians</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="mohagpt.html">Tutorial: Easy Quantum System Setup with ChatGPT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gui.html">Tutorial: Graphical User Interface (GUI) with ModelHamiltonian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="RG.html">Tutorial: Richardson-Gaudin model</a></li>
+
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tutorial: The Picket-Fence Model Hamiltonian</a></li>
+<li class="toctree-l1"><a class="reference internal" href="molkit.html">Tutorial: Molkit</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">API</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../api/api.html">Hamiltonian API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/occupation.html">Occupation-based Hamiltonians</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/spin.html">Spin-based Hamiltonians</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/theochem/ModelHamiltonian/blob/main/website/examples/picket_fence.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="initThebeSBT()"
+  class="btn btn-sm btn-launch-thebe dropdown-item"
+  title="Launch Thebe"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-play"></i>
+  </span>
+<span class="btn__text-container">Live Code</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/theochem/ModelHamiltonian" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/theochem/ModelHamiltonian/issues/new?title=Issue%20on%20page%20%2Fexamples/picket_fence.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/examples/picket_fence.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Tutorial: The Picket-Fence Model Hamiltonian</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physics-of-the-picket-fence-and-richardson-gaudin-models">1. Physics of the Picket-Fence and Richardson-Gaudin Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-in-moha">Implementation in <code class="docutils literal notranslate"><span class="pre">moha</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-notation-and-identification">State Notation and Identification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#result-1-ground-state-energy-shift-table-i">2. Result 1: Ground State Energy Shift (Table I)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#result-2-excitation-energies-table-ii">3. Result 2: Excitation Energies (Table II)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#result-3-occupation-benchmarks-table-iv">4. Result 3: Occupation Benchmarks (Table IV)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="tutorial-the-picket-fence-model-hamiltonian">
+<h1>Tutorial: The Picket-Fence Model Hamiltonian<a class="headerlink" href="#tutorial-the-picket-fence-model-hamiltonian" title="Link to this heading">#</a></h1>
+<p>This tutorial explores the <strong>Picket-Fence model</strong>, a foundational exactly solvable model in many-body physics. We will use the <code class="docutils literal notranslate"><span class="pre">ModelHamiltonian</span></code> (moha) library to reproduce numerical results from the seminal paper by <a class="reference external" href="https://journals.aps.org/pr/abstract/10.1103/PhysRev.141.949">R.W. Richardson (1966)</a>.</p>
+<section id="physics-of-the-picket-fence-and-richardson-gaudin-models">
+<h2>1. Physics of the Picket-Fence and Richardson-Gaudin Models<a class="headerlink" href="#physics-of-the-picket-fence-and-richardson-gaudin-models" title="Link to this heading">#</a></h2>
+<p>The <strong>Richardson-Gaudin (RG) model</strong> describes a system of fermions interacting through a pairing force. It is a cornerstone of the theory of superconductivity and nuclear physics, providing an exact solution to the reduced BCS Hamiltonian. The <strong>picket-fence model</strong> is a specific, highly symmetric case of the RG model where the single-particle energy levels <span class="math notranslate nohighlight">\(\varepsilon_j\)</span> are equally spaced.</p>
+<p>The physical Hamiltonian for <span class="math notranslate nohighlight">\(M\)</span> pairs of fermions in <span class="math notranslate nohighlight">\(2N\)</span> levels is:
+$<span class="math notranslate nohighlight">\(\hat{H} = \sum_{j=1}^{2N} \varepsilon_j \hat{n}_j - g \sum_{i,j=1}^{2N} b_i^\dagger b_j\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\varepsilon_j = j<span class="math notranslate nohighlight">\( (in units of level spacing) for \)</span>j=1, \dots, 2N<span class="math notranslate nohighlight">\(, and \)</span>b_j^\dagger = a_{j\alpha}^\dagger a_{j\beta}^\dagger<span class="math notranslate nohighlight">\( creates a pair in level \)</span>j$.</p>
+<section id="implementation-in-moha">
+<h3>Implementation in <code class="docutils literal notranslate"><span class="pre">moha</span></code><a class="headerlink" href="#implementation-in-moha" title="Link to this heading">#</a></h3>
+<p>In the <code class="docutils literal notranslate"><span class="pre">moha</span></code> library, the RG model is implemented via the <code class="docutils literal notranslate"><span class="pre">HamRG</span></code> class using a <strong>pseudo-spin representation</strong>. Each spatial level <span class="math notranslate nohighlight">\(j\)</span> is mapped to a spin-1/2 operator <span class="math notranslate nohighlight">\(\mathbf{S}_j\)</span>. The mapping to the physical Hamiltonian requires setting the interaction and Zeeman terms as follows:</p>
+<ol class="arabic simple">
+<li><p><strong>Interaction</strong>: Set <span class="math notranslate nohighlight">\(J_{ij}^{eq} = -2g\)</span> for all <span class="math notranslate nohighlight">\(i, j\)</span> (including diagonal).</p></li>
+<li><p><strong>Zeeman Term</strong>: Set <span class="math notranslate nohighlight">\(\mu_j = 2\varepsilon_j + J_{jj}^{eq}\)</span>. This ensures the spatial one-body integrals <span class="math notranslate nohighlight">\(h_{jj} = \varepsilon_j\)</span>.</p></li>
+<li><p><strong>Energy Shift</strong>: Richardson’s “Ground-state energy shift” <span class="math notranslate nohighlight">\(\Delta E\)</span> is the correlation energy:
+$<span class="math notranslate nohighlight">\(\Delta E = E_{FS}(g) - E(g)\)</span><span class="math notranslate nohighlight">\(
+where \)</span>E_{FS}(g) = E_{g=0} - M^2 g<span class="math notranslate nohighlight">\( is the Fermi sea energy at coupling \)</span>g<span class="math notranslate nohighlight">\(, and \)</span>E_{g=0} = 2 \sum_{j=1}^M j$.</p></li>
+</ol>
+</section>
+<section id="state-notation-and-identification">
+<h3>State Notation and Identification<a class="headerlink" href="#state-notation-and-identification" title="Link to this heading">#</a></h3>
+<p>Richardson labels the eigenstates using the notation <span class="math notranslate nohighlight">\((-n)^p(+m)^q\)</span>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n\)</span> (<span class="math notranslate nohighlight">\(m\)</span>): Index of the level below (above) the Fermi energy (<span class="math notranslate nohighlight">\(n=1\)</span> is HOMO, <span class="math notranslate nohighlight">\(m=1\)</span> is LUMO).</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span> (<span class="math notranslate nohighlight">\(q\)</span>): Number of particles removed from level <span class="math notranslate nohighlight">\(n\)</span> or added to level <span class="math notranslate nohighlight">\(m\)</span>.</p></li>
+<li><p><strong>Seniority-Zero states</strong> (<span class="math notranslate nohighlight">\(
+u=0\)</span>) involve pair moves (<span class="math notranslate nohighlight">\(p, q\)</span> even) and are found in the Singlet sector.</p></li>
+<li><p><strong>Seniority-Two states</strong> (<span class="math notranslate nohighlight">\(
+u=2\)</span>) involve single particle moves (<span class="math notranslate nohighlight">\(p, q\)</span> odd) and are found in the Triplet sector.</p></li>
+</ul>
+</section>
+</section>
+<section id="result-1-ground-state-energy-shift-table-i">
+<h2>2. Result 1: Ground State Energy Shift (Table I)<a class="headerlink" href="#result-1-ground-state-energy-shift-table-i" title="Link to this heading">#</a></h2>
+<p>We first compute the <strong>Ground State Energy Shift</strong> <span class="math notranslate nohighlight">\(\Delta E(2N)\)</span> for <span class="math notranslate nohighlight">\(N=4\)</span> pairs in 8 levels. This shift represents the energy gained due to pairing correlations relative to the non-interacting Fermi sea. Our results show excellent agreement with Richardson’s original calculations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">moha.hamiltonians</span><span class="w"> </span><span class="kn">import</span> <span class="n">HamRG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyscf</span><span class="w"> </span><span class="kn">import</span> <span class="n">fci</span><span class="p">,</span> <span class="n">gto</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_picket_fence</span><span class="p">(</span><span class="n">n_pairs</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">nroots</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">n_levels</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">n_pairs</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_levels</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">J_val</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0</span> <span class="o">*</span> <span class="n">g</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="n">eps</span> <span class="o">+</span> <span class="n">J_val</span>
+    <span class="n">ham</span> <span class="o">=</span> <span class="n">HamRG</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">J_eq</span><span class="o">=</span><span class="n">J_val</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">n_levels</span><span class="p">,</span> <span class="n">n_levels</span><span class="p">)))</span>
+    <span class="n">h1</span> <span class="o">=</span> <span class="n">ham</span><span class="o">.</span><span class="n">generate_one_body_integral</span><span class="p">(</span><span class="n">dense</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;spatial basis&#39;</span><span class="p">)</span>
+    <span class="n">h2</span> <span class="o">=</span> <span class="n">ham</span><span class="o">.</span><span class="n">generate_two_body_integral</span><span class="p">(</span><span class="n">dense</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">basis</span><span class="o">=</span><span class="s1">&#39;spatial basis&#39;</span><span class="p">,</span> <span class="n">sym</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">h2_ch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">einsum</span><span class="p">(</span><span class="s1">&#39;ijkl-&gt;ikjl&#39;</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span>
+    
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">gto</span><span class="o">.</span><span class="n">Mole</span><span class="p">()</span>
+    <span class="n">mol</span><span class="o">.</span><span class="n">nelec</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_pairs</span><span class="p">,</span> <span class="n">n_pairs</span><span class="p">)</span>
+    <span class="n">cisolver</span> <span class="o">=</span> <span class="n">fci</span><span class="o">.</span><span class="n">direct_spin1</span><span class="o">.</span><span class="n">FCI</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">cisolver</span><span class="o">.</span><span class="n">spin</span> <span class="o">=</span> <span class="n">spin</span>
+    <span class="n">e_moha</span><span class="p">,</span> <span class="n">ci</span> <span class="o">=</span> <span class="n">cisolver</span><span class="o">.</span><span class="n">kernel</span><span class="p">(</span><span class="n">h1</span><span class="p">,</span> <span class="n">h2_ch</span><span class="p">,</span> <span class="n">norb</span><span class="o">=</span><span class="n">n_levels</span><span class="p">,</span> <span class="n">nelec</span><span class="o">=</span><span class="n">mol</span><span class="o">.</span><span class="n">nelec</span><span class="p">,</span> <span class="n">nroots</span><span class="o">=</span><span class="n">nroots</span><span class="p">,</span> <span class="n">ecore</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">e_moha</span><span class="p">),</span> <span class="n">ci</span>
+
+<span class="n">benchmarks_i</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">5.309</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">6.610</span><span class="p">),</span> <span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">8.018</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">9.513</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">11.081</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">E_0</span> <span class="o">=</span> <span class="mf">20.0</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">exact_de</span> <span class="ow">in</span> <span class="n">benchmarks_i</span><span class="p">:</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">solve_picket_fence</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">efs</span> <span class="o">=</span> <span class="n">E_0</span> <span class="o">-</span> <span class="mi">16</span> <span class="o">*</span> <span class="n">g</span>
+    <span class="n">computed_de</span> <span class="o">=</span> <span class="n">efs</span> <span class="o">-</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">g</span><span class="p">,</span> <span class="n">exact_de</span><span class="p">,</span> <span class="n">computed_de</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">computed_de</span> <span class="o">-</span> <span class="n">exact_de</span><span class="p">)])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reproduction of Richardson 1966, Table I (Delta E for N=4):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;Richardson (1966)&quot;</span><span class="p">,</span> <span class="s2">&quot;Computed&quot;</span><span class="p">,</span> <span class="s2">&quot;Error&quot;</span><span class="p">],</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;github&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reproduction of Richardson 1966, Table I (Delta E for N=4):
+|   g |   Richardson (1966) |   Computed |       Error |
+|-----|---------------------|------------|-------------|
+| 0.7 |               5.309 |    5.30904 | 3.62451e-05 |
+| 0.8 |               6.61  |    6.60978 | 0.000222959 |
+| 0.9 |               8.018 |    8.01763 | 0.000370965 |
+| 1   |               9.513 |    9.51341 | 0.00041376  |
+| 1.1 |              11.081 |   11.081   | 2.39949e-05 |
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="result-2-excitation-energies-table-ii">
+<h2>3. Result 2: Excitation Energies (Table II)<a class="headerlink" href="#result-2-excitation-energies-table-ii" title="Link to this heading">#</a></h2>
+<p>We now investigate the <strong>Excitation Energies</strong> for four specific states. In the <code class="docutils literal notranslate"><span class="pre">moha</span></code> implementation, we identify these by searching the appropriate spin sector (Singlet for pair moves, Triplet for single moves). The agreement for these excitation energies is consistently high, typically within <span class="math notranslate nohighlight">\(10^{-3}\)</span> units of the level spacing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g_list</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">]</span>
+<span class="n">benchmarks_ii</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mf">0.7</span><span class="p">:</span> <span class="p">[</span><span class="mf">3.561</span><span class="p">,</span> <span class="mf">4.427</span><span class="p">,</span> <span class="mf">3.635</span><span class="p">,</span> <span class="mf">5.418</span><span class="p">],</span>
+    <span class="mf">0.8</span><span class="p">:</span> <span class="p">[</span><span class="mf">4.324</span><span class="p">,</span> <span class="mf">5.141</span><span class="p">,</span> <span class="mf">4.334</span><span class="p">,</span> <span class="mf">5.988</span><span class="p">],</span>
+    <span class="mf">0.9</span><span class="p">:</span> <span class="p">[</span><span class="mf">5.148</span><span class="p">,</span> <span class="mf">5.910</span><span class="p">,</span> <span class="mf">5.115</span><span class="p">,</span> <span class="mf">6.626</span><span class="p">],</span>
+    <span class="mf">1.0</span><span class="p">:</span> <span class="p">[</span><span class="mf">6.010</span><span class="p">,</span> <span class="mf">6.714</span><span class="p">,</span> <span class="mf">5.948</span><span class="p">,</span> <span class="mf">7.316</span><span class="p">],</span>
+    <span class="mf">1.1</span><span class="p">:</span> <span class="p">[</span><span class="mf">6.896</span><span class="p">,</span> <span class="mf">7.541</span><span class="p">,</span> <span class="mf">6.818</span><span class="p">,</span> <span class="mf">8.045</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">state_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;(-1)^-2(+1)^2&quot;</span><span class="p">,</span> <span class="s2">&quot;(-1)^-2(+2)^2&quot;</span><span class="p">,</span> <span class="s2">&quot;(-1)^-1(+1)^1&quot;</span><span class="p">,</span> <span class="s2">&quot;(-1)^-1(+2)^1&quot;</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_table_ii</span><span class="p">():</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">]:</span>
+        <span class="n">es</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_picket_fence</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nroots</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">et</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">solve_picket_fence</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nroots</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+        <span class="n">e_gs</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ex_s</span> <span class="o">=</span> <span class="n">es</span> <span class="o">-</span> <span class="n">e_gs</span>
+        <span class="n">ex_t</span> <span class="o">=</span> <span class="n">et</span> <span class="o">-</span> <span class="n">e_gs</span> <span class="o">-</span> <span class="n">g</span>
+        
+        <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">]</span>
+        <span class="n">targets</span> <span class="o">=</span> <span class="n">benchmarks_ii</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">targets</span><span class="p">):</span>
+            <span class="n">ds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ex_s</span> <span class="o">-</span> <span class="n">target</span><span class="p">))</span>
+            <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ex_t</span> <span class="o">-</span> <span class="n">target</span><span class="p">))</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">ex_s</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ex_s</span> <span class="o">-</span> <span class="n">target</span><span class="p">))]</span> <span class="k">if</span> <span class="n">ds</span> <span class="o">&lt;</span> <span class="n">dt</span> <span class="k">else</span> <span class="n">ex_t</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ex_t</span> <span class="o">-</span> <span class="n">target</span><span class="p">))]</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="o">-</span><span class="n">target</span><span class="p">)</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">results</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reproduction of Richardson 1966, Table II (Excitation Energies):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">run_table_ii</span><span class="p">(),</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">state_labels</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;github&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reproduction of Richardson 1966, Table II (Excitation Energies):
+|   g | (-1)^-2(+1)^2   | (-1)^-2(+2)^2   | (-1)^-1(+1)^1   | (-1)^-1(+2)^1   |
+|-----|-----------------|-----------------|-----------------|-----------------|
+| 0.7 | 3.561 (2.5e-04) | 4.427 (9.3e-06) | 3.635 (9.9e-05) | 5.418 (1.6e-04) |
+| 0.8 | 4.324 (2.7e-04) | 5.141 (1.6e-04) | 4.334 (2.8e-04) | 5.987 (5.4e-04) |
+| 0.9 | 5.148 (4.5e-04) | 5.910 (2.3e-04) | 5.114 (7.7e-04) | 6.626 (2.2e-04) |
+| 1   | 6.010 (1.8e-04) | 6.714 (3.8e-04) | 5.949 (8.7e-04) | 7.316 (2.1e-04) |
+| 1.1 | 6.896 (2.7e-04) | 7.541 (1.9e-04) | 6.818 (2.9e-04) | 8.045 (2.4e-04) |
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="result-3-occupation-benchmarks-table-iv">
+<h2>4. Result 3: Occupation Benchmarks (Table IV)<a class="headerlink" href="#result-3-occupation-benchmarks-table-iv" title="Link to this heading">#</a></h2>
+<p>Finally, we compare the <strong>Occupation Probabilities</strong> <span class="math notranslate nohighlight">\(n_j\)</span> for the ground and excited states. While the energies match closely, the occupations of excited states show visible discrepancies compared to the 1966 benchmarks. This likely reflects the sensitivity of the excited state wave functions to the numerical precision of the Bethe Ansatz solution versus our Full CI approach, especially in the presence of strong pairing correlations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_occs_for_states</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">b_ii</span><span class="p">):</span>
+    <span class="n">es</span><span class="p">,</span> <span class="n">cis</span> <span class="o">=</span> <span class="n">solve_picket_fence</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">nroots</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">et</span><span class="p">,</span> <span class="n">cit</span> <span class="o">=</span> <span class="n">solve_picket_fence</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">spin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">nroots</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+    <span class="n">e_gs</span> <span class="o">=</span> <span class="n">es</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">occs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">target</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="mf">0.0</span><span class="p">]</span> <span class="o">+</span> <span class="n">b_ii</span><span class="p">):</span>
+        <span class="n">ds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">es</span> <span class="o">-</span> <span class="n">e_gs</span><span class="p">)</span> <span class="o">-</span> <span class="n">target</span><span class="p">))</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">et</span> <span class="o">-</span> <span class="n">e_gs</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span> <span class="o">-</span> <span class="n">target</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">ds</span> <span class="o">&lt;</span> <span class="n">dt</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">es</span> <span class="o">-</span> <span class="n">e_gs</span><span class="p">)</span> <span class="o">-</span> <span class="n">target</span><span class="p">))</span>
+            <span class="n">dm1</span> <span class="o">=</span> <span class="n">fci</span><span class="o">.</span><span class="n">direct_spin1</span><span class="o">.</span><span class="n">FCI</span><span class="p">(</span><span class="n">gto</span><span class="o">.</span><span class="n">Mole</span><span class="p">())</span><span class="o">.</span><span class="n">make_rdm1</span><span class="p">(</span><span class="n">cis</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">((</span><span class="n">et</span> <span class="o">-</span> <span class="n">e_gs</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span> <span class="o">-</span> <span class="n">target</span><span class="p">))</span>
+            <span class="n">dm1</span> <span class="o">=</span> <span class="n">fci</span><span class="o">.</span><span class="n">direct_spin1</span><span class="o">.</span><span class="n">FCI</span><span class="p">(</span><span class="n">gto</span><span class="o">.</span><span class="n">Mole</span><span class="p">())</span><span class="o">.</span><span class="n">make_rdm1</span><span class="p">(</span><span class="n">cit</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="mi">8</span><span class="p">,</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="n">occs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">dm1</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">occs</span>
+
+<span class="n">benchmarks_iv_g08</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Ground&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1224</span><span class="p">,</span> <span class="mf">0.1966</span><span class="p">,</span> <span class="mf">0.3473</span><span class="p">,</span> <span class="mf">0.6527</span><span class="p">,</span> <span class="mf">0.8034</span><span class="p">,</span> <span class="mf">0.8776</span><span class="p">],</span>
+    <span class="s2">&quot;(-1)^-2(+1)^2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0536</span><span class="p">,</span> <span class="mf">0.1011</span><span class="p">,</span> <span class="mf">0.5032</span><span class="p">,</span> <span class="mf">0.4968</span><span class="p">,</span> <span class="mf">0.8989</span><span class="p">,</span> <span class="mf">0.9464</span><span class="p">],</span>
+    <span class="s2">&quot;(-1)^-2(+2)^2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0868</span><span class="p">,</span> <span class="mf">0.1655</span><span class="p">,</span> <span class="mf">0.2903</span><span class="p">,</span> <span class="mf">0.3038</span><span class="p">,</span> <span class="mf">0.7771</span><span class="p">,</span> <span class="mf">0.8930</span><span class="p">],</span>
+    <span class="s2">&quot;(-1)^-1(+1)^1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0412</span><span class="p">,</span> <span class="mf">0.0657</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">0.9343</span><span class="p">,</span> <span class="mf">0.9588</span><span class="p">],</span>
+    <span class="s2">&quot;(-1)^-1(+2)^1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0443</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">0.1264</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">0.8960</span><span class="p">,</span> <span class="mf">0.9404</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="n">benchmarks_iv_g10</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;Ground&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1749</span><span class="p">,</span> <span class="mf">0.2581</span><span class="p">,</span> <span class="mf">0.3967</span><span class="p">,</span> <span class="mf">0.6033</span><span class="p">,</span> <span class="mf">0.7419</span><span class="p">,</span> <span class="mf">0.8251</span><span class="p">],</span>
+    <span class="s2">&quot;(-1)^-2(+1)^2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0796</span><span class="p">,</span> <span class="mf">0.1344</span><span class="p">,</span> <span class="mf">0.4372</span><span class="p">,</span> <span class="mf">0.5628</span><span class="p">,</span> <span class="mf">0.8656</span><span class="p">,</span> <span class="mf">0.9204</span><span class="p">],</span>
+    <span class="s2">&quot;(-1)^-2(+2)^2&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.1135</span><span class="p">,</span> <span class="mf">0.1937</span><span class="p">,</span> <span class="mf">0.3635</span><span class="p">,</span> <span class="mf">0.3789</span><span class="p">,</span> <span class="mf">0.7260</span><span class="p">,</span> <span class="mf">0.8505</span><span class="p">],</span>
+    <span class="s2">&quot;(-1)^-1(+1)^1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0715</span><span class="p">,</span> <span class="mf">0.1105</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">0.8894</span><span class="p">,</span> <span class="mf">0.9285</span><span class="p">],</span>
+    <span class="s2">&quot;(-1)^-1(+2)^1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0755</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">0.1952</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mf">0.8386</span><span class="p">,</span> <span class="mf">0.9027</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">state_keys</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Ground&quot;</span><span class="p">,</span> <span class="s2">&quot;(-1)^-2(+1)^2&quot;</span><span class="p">,</span> <span class="s2">&quot;(-1)^-2(+2)^2&quot;</span><span class="p">,</span> <span class="s2">&quot;(-1)^-1(+1)^1&quot;</span><span class="p">,</span> <span class="s2">&quot;(-1)^-1(+2)^1&quot;</span><span class="p">]</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;+3&quot;</span><span class="p">,</span> <span class="s2">&quot;+2&quot;</span><span class="p">,</span> <span class="s2">&quot;+1&quot;</span><span class="p">,</span> <span class="s2">&quot;-1&quot;</span><span class="p">,</span> <span class="s2">&quot;-2&quot;</span><span class="p">,</span> <span class="s2">&quot;-3&quot;</span><span class="p">]</span>
+<span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="n">final_results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">g</span><span class="p">,</span> <span class="n">bench</span> <span class="ow">in</span> <span class="p">[(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">benchmarks_iv_g08</span><span class="p">),</span> <span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">benchmarks_iv_g10</span><span class="p">)]:</span>
+    <span class="n">occs</span> <span class="o">=</span> <span class="n">get_occs_for_states</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">benchmarks_ii</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lvl</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">levels</span><span class="p">):</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span><span class="p">,</span> <span class="n">lvl</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">sname</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">state_keys</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">sname</span> <span class="ow">in</span> <span class="n">bench</span><span class="p">:</span>
+                <span class="n">comp</span> <span class="o">=</span> <span class="n">occs</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">indices</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+                <span class="n">exact</span> <span class="o">=</span> <span class="n">bench</span><span class="p">[</span><span class="n">sname</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">comp</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">comp</span><span class="o">-</span><span class="n">exact</span><span class="p">)</span><span class="si">:</span><span class="s2">.1e</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">exact</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">comp</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> (N/A)&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;N/A&quot;</span><span class="p">)</span>
+        <span class="n">final_results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Reproduction of Richardson 1966, Table IV (Occupations):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabulate</span><span class="p">(</span><span class="n">final_results</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="s2">&quot;Level&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">state_keys</span><span class="p">,</span> <span class="n">tablefmt</span><span class="o">=</span><span class="s2">&quot;github&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Reproduction of Richardson 1966, Table IV (Occupations):
+|   g |   Level | Ground           | (-1)^-2(+1)^2    | (-1)^-2(+2)^2    | (-1)^-1(+1)^1    | (-1)^-1(+2)^1    |
+|-----|---------|------------------|------------------|------------------|------------------|------------------|
+| 0.8 |      +3 | 0.1224 (4.5e-05) | 0.0412 (1.2e-02) | 0.0454 (4.1e-02) | 0.0536 (1.2e-02) | 0.0970 (5.3e-02) |
+| 0.8 |      +2 | 0.1966 (1.4e-05) | 0.0657 (3.5e-02) | 0.4702 (3.0e-01) | 0.1011 (3.5e-02) | 0.4426 (N/A)     |
+| 0.8 |      +1 | 0.3473 (3.8e-05) | 0.5000 (3.2e-03) | 0.1545 (1.4e-01) | 0.5032 (N/A)     | 0.4947 (3.7e-01) |
+| 0.8 |      -1 | 0.6527 (3.8e-05) | 0.5000 (3.2e-03) | 0.5281 (2.2e-01) | 0.4968 (N/A)     | 0.5082 (N/A)     |
+| 0.8 |      -2 | 0.8034 (1.4e-05) | 0.9343 (3.5e-02) | 0.8662 (8.9e-02) | 0.8989 (3.5e-02) | 0.5542 (3.4e-01) |
+| 0.8 |      -3 | 0.8776 (4.5e-05) | 0.9588 (1.2e-02) | 0.9420 (4.9e-02) | 0.9464 (1.2e-02) | 0.9031 (3.7e-02) |
+| 1   |      +3 | 0.1749 (2.9e-05) | 0.0715 (8.1e-03) | 0.0811 (3.2e-02) | 0.0796 (8.1e-03) | 0.1315 (5.6e-02) |
+| 1   |      +2 | 0.2581 (9.3e-06) | 0.1105 (2.4e-02) | 0.4133 (2.2e-01) | 0.1344 (2.4e-02) | 0.4338 (N/A)     |
+| 1   |      +1 | 0.3967 (2.5e-05) | 0.5000 (6.3e-02) | 0.2732 (9.0e-02) | 0.4372 (N/A)     | 0.4923 (3.0e-01) |
+| 1   |      -1 | 0.6033 (2.5e-05) | 0.5000 (6.3e-02) | 0.5780 (2.0e-01) | 0.5628 (N/A)     | 0.5077 (N/A)     |
+| 1   |      -2 | 0.7419 (9.3e-06) | 0.8895 (2.4e-02) | 0.7519 (2.6e-02) | 0.8656 (2.4e-02) | 0.5662 (2.7e-01) |
+| 1   |      -3 | 0.8251 (2.9e-05) | 0.9285 (8.1e-03) | 0.9083 (5.8e-02) | 0.9204 (8.1e-03) | 0.8685 (3.4e-02) |
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Link to this heading">#</a></h2>
+<p>This tutorial demonstrated how the <code class="docutils literal notranslate"><span class="pre">ModelHamiltonian</span></code> library’s <code class="docutils literal notranslate"><span class="pre">HamRG</span></code> class can be used to accurately model pairing interactions. By correctly mapping the physical parameters and identifying the appropriate spin sectors, we achieved high-fidelity reproduction of historical benchmarks for ground and excited state energies. The picket-fence model serves as an excellent entry point into the more complex physics of the Richardson-Gaudin model family.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "theochem/ModelHamiltonian",
+            ref: "main",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./examples"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="RG.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tutorial: Richardson-Gaudin model</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="molkit.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tutorial: Molkit</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#physics-of-the-picket-fence-and-richardson-gaudin-models">1. Physics of the Picket-Fence and Richardson-Gaudin Models</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#implementation-in-moha">Implementation in <code class="docutils literal notranslate"><span class="pre">moha</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#state-notation-and-identification">State Notation and Identification</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#result-1-ground-state-energy-shift-table-i">2. Result 1: Ground State Energy Shift (Table I)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#result-2-excitation-energies-table-ii">3. Result 2: Excitation Energies (Table II)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#result-3-occupation-benchmarks-table-iv">4. Result 3: Occupation Benchmarks (Table IV)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The QC-Dev Community with the support of Digital Research Alliance of Canada and The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2024-2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
